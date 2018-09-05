@@ -1,0 +1,48 @@
+{
+  "name": "tilume/pdf",
+  "description": "PDF exports in Laravel using dompdf",
+  "license": "MIT",
+  "keywords": [
+    "laravel",
+    "php",
+    "pdf",
+    "dompdf",
+    "export"
+  ],
+  "authors": [
+    {
+      "name": "Carlos Alonso Turner Benites",
+      "email": "carlosturnerbenites@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.0",
+    "illuminate/support": "^5.5",
+    "dompdf/dompdf": "^0.8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~7.0",
+    "orchestra/testbench": "^3.6",
+    "orchestra/database": "^3.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tilume\\PDF\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tilume\\PDF\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Tilume\\PDF\\PDFServiceProvider"
+      ],
+      "aliases": {
+        "PDF": "Tilume\\PDF\\Facades\\PDF"
+      }
+    }
+  }
+}

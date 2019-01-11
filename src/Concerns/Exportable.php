@@ -13,6 +13,36 @@ trait Exportable
      * @throws NoFilenameGivenException
      * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
+    public function stream(string $fileName = null)
+    {
+        $fileName = $fileName ?? $this->fileName ?? null;
+        if (null === $fileName) {
+            throw new NoFilenameGivenException();
+        }
+        return resolve(PDF::class)->stream($this, $fileName);
+    }
+
+    /**
+     * @param string      $fileName
+     *
+     * @throws NoFilenameGivenException
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function output(string $fileName = null)
+    {
+        $fileName = $fileName ?? $this->fileName ?? null;
+        if (null === $fileName) {
+            throw new NoFilenameGivenException();
+        }
+        return resolve(PDF::class)->output($this, $fileName);
+    }
+
+    /**
+     * @param string      $fileName
+     *
+     * @throws NoFilenameGivenException
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function download(string $fileName = null)
     {
         $fileName = $fileName ?? $this->fileName ?? null;

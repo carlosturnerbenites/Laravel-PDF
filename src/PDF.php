@@ -30,7 +30,38 @@ class PDF
         $pdf = $this->export($export, $fileName);
         $pdf->render();
         $pdf->stream();
-        // return $this->response->download($pdf->output(), $fileName);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function stream($export, string $fileName)
+    {
+        $pdf = $this->export($export, $fileName);
+        $pdf->render();
+
+        $name = "document.pdf";
+        if ($fileName) {
+            $name = $fileName;
+        }
+
+        /*
+        'attachment' => download
+        'inline' => render in browser
+        */
+
+        return $this->response->make($pdf->output())->withHeaders([
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => "inline; filename='$name'",
+        ]);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function output($export, string $fileName)
+    {
+        $pdf = $this->export($export, $fileName);
+        $pdf->render();
+        return $pdf->output();
     }
 
     /**

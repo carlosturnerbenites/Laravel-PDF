@@ -29,7 +29,7 @@ class PDF
     {
         $pdf = $this->export($export, $fileName);
         $pdf->render();
-        $pdf->stream();
+        $pdf->stream($fileName);
     }
     /**
      * {@inheritdoc}
@@ -51,7 +51,7 @@ class PDF
 
         return $this->response->make($pdf->output())->withHeaders([
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => "inline; filename='$name'",
+            'Content-Disposition' => "inline; filename=$name",
         ]);
     }
     /**

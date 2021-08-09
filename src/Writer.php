@@ -50,7 +50,9 @@ class Writer
      */
     public function fromView(FromView $export)
     {
-        $pdf = new Dompdf();
+        $options = new \Dompdf\Options();
+        $options->setChroot(realpath(base_path())); // chage to conifg
+        $pdf = new Dompdf($options);
 
         $pdf->loadHtml($export->view()->render());
 
